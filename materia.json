@@ -14,5 +14,9 @@
 		"username": "xxxxx",
 		"password": "xxxxxxxxx"
 	},
-	"links": []
+	"links": [],
+	"client": {
+		"src": "angular-client",
+		"dist": "angular-client/dist/materia-user-management-example"
+	}
 }
