@@ -4,6 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"angular:build": "cd angular-client && npm run build",
+		"angular:prod": "cd angular-client && npm run prod",
+		"angular:watch": "cd angular-client && npm run watch",
 		"postinstall": "materia relink",
 		"start": "materia start"
 	},

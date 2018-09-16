@@ -17,6 +17,11 @@
 	"links": [],
 	"client": {
 		"src": "angular-client",
-		"dist": "angular-client/dist/materia-user-management-example"
+		"dist": "angular-client/dist/materia-user-management-example",
+		"scripts": {
+			"build": "angular:build",
+			"watch": "angular:watch",
+			"prod": "angular:prod"
+		}
 	}
 }
