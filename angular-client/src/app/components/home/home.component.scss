@@ -1,0 +1,23 @@
+img {
+  height: 150px;
+  width: auto;
+  margin: 40px 0;
+  position: relative;
+  animation: tour 2s infinite;
+}
+
+button {
+    margin: 15px;
+}
+
+@keyframes tour {
+    0% {
+        top: 0px;
+    }
+    50% {
+        top: 6px
+    }
+    100% {
+        top: 0;
+    }
+}

@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule, MatFormFieldModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatToolbarModule, MatButtonModule } from '@angular/material';
 
 const UI_MODULES = [
   FlexLayoutModule,
 
   MatCardModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatToolbarModule,
+  MatButtonModule
 ];
 
 @NgModule({

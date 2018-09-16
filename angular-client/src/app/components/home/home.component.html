@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <img src="http://getmateria.com/img/logo2.png" >
+  <h1 class="title">Materia User Management</h1>
+  <h2 style="color:#999999;">Sample Application</h2>
+  <div fxLayout="column">
+    <button mat-raised-button color="primary" routerLink='/signin' *ngIf="! user">
+      Sign in
+    </button>
+    <button mat-raised-button color="primary" routerLink='/profile' *ngIf="user">
+      Enter
+    </button>
+  </div>
+</div>
