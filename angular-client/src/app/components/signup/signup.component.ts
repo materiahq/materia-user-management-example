@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Signup } from '../../stores/user/user.state';
+import { Signup, CheckConnection } from '../../stores/user/user.state';
 import { Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'muser-signup',
@@ -15,7 +17,7 @@ export class SignupComponent implements OnInit {
     return this.form.get('email');
   }
 
-  get emailControlErrors(): {required?: boolean; email?: boolean} {
+  get emailControlErrors(): { required?: boolean; email?: boolean } {
     return this.form.get('email') ? this.form.get('email').errors : null;
   }
 
@@ -23,11 +25,11 @@ export class SignupComponent implements OnInit {
     return this.form.get('password');
   }
 
-  get passwordControlErrors(): {required?: boolean} {
+  get passwordControlErrors(): { required?: boolean } {
     return this.form.get('password') ? this.form.get('password').errors : null;
   }
 
-  constructor(private fb: FormBuilder, private store: Store) { }
+  constructor(private fb: FormBuilder, private store: Store, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -38,8 +40,15 @@ export class SignupComponent implements OnInit {
 
   signup() {
     if (this.form.valid) {
-      this.store.dispatch(new Signup(this.form.value));
+      this.store.dispatch(new Signup(this.form.value))
+        .subscribe(
+          () => this.store.dispatch(new CheckConnection())
+            .subscribe(() => {
+              this.store.dispatch(new Navigate(['/profile']));
+            },
+              (err) => this.snackBar.open(err.error, null, { duration: 1500 })
+            ),
+          (err) => this.snackBar.open(err.error, null, { duration: 1500 }));
     }
   }
-
 }
