@@ -39,4 +39,8 @@ export class UsermanagementService {
   changeLostPassword(data) {
     return this.http.put('api/user/lost_password', data).toPromise();
   }
+
+  sendVerificationEmail(data) {
+    return this.http.post('api/user/me/send_verification_email', data).toPromise();
+  }
 }

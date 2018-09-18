@@ -3,6 +3,7 @@ import { UsermanagementService } from '../../services/usermanagement.service';
 import { Navigate } from '@ngxs/router-plugin';
 
 export interface IUser {
+  id_user?: number;
   email?: string;
   connected: boolean;
   verified?: boolean;
@@ -47,6 +48,10 @@ export class CheckConnection {
   static readonly type = '[User] CheckConnection';
 }
 
+export class SendVerificationEmail {
+  static readonly type = '[User] SendVerificationEmail';
+}
+
 @State<IUser>({
   name: 'user',
   defaults: {
@@ -74,6 +79,13 @@ export class UserState implements NgxsOnInit {
       connected: true,
       ...result
     });
+  }
+
+  @Action(SendVerificationEmail)
+  async sendVerificationEmail(ctx: StateContext<IUser>) {
+    const id_user = ctx.getState().id_user;
+    const result: any = await this.userService.sendVerificationEmail({id_user: id_user});
+    return;
   }
 
 

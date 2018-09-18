@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { IUser, Logout, ChangePassword, ChangeEmail } from '../../stores/user/user.state';
+import { IUser, Logout, ChangePassword, ChangeEmail, SendVerificationEmail } from '../../stores/user/user.state';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { PasswordEditorComponent } from '../../dialogs/password-editor/password-editor.component';
 import { EmailEditorComponent } from '../../dialogs/email-editor/email-editor.component';
@@ -27,8 +27,8 @@ export class ProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(PasswordEditorComponent, { panelClass: 'classic-dialog' });
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result !== 'cancel') {
-        this.store.dispatch(new ChangePassword({old_password: result.old_password, new_password: result.new_password})).subscribe(() => {
-          this.snackBar.open('Password successfully changed !', null, {duration: 1500});
+        this.store.dispatch(new ChangePassword({ old_password: result.old_password, new_password: result.new_password })).subscribe(() => {
+          this.snackBar.open('Password successfully changed !', null, { duration: 1500 });
         });
       }
     });
@@ -39,10 +39,17 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result !== 'cancel') {
         this.store.dispatch(new ChangeEmail(result)).subscribe(() => {
-          this.snackBar.open(`A verification email has been sent to '${ result.new_email }' !`, null, {duration: 1500});
+          this.snackBar.open(`A verification email has been sent to '${result.new_email}' !`, null, { duration: 1500 });
         });
       }
     });
   }
 
+  sendVerificationEmail() {
+    this.store.dispatch(new SendVerificationEmail()).subscribe(
+      () => {
+        this.snackBar.open('Verification email has been sent !', null, { duration: 1500 });
+      },
+      (errorResponse) => this.snackBar.open(errorResponse.error, null, { duration: 1500 }));
+  }
 }

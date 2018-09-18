@@ -3,7 +3,7 @@
   <div>
     <span>You are now connected to our materia usermanagement example application!</span>
   </div>
-  <div fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="center center" class="email-status">
     <div class="verified" fxLayout="row" fxLayoutAlign="center center" *ngIf="user.verified">
         <mat-icon>verified_user</mat-icon>
         <span>Verified Email</span>
@@ -12,6 +12,9 @@
         <mat-icon>close</mat-icon>
         <span>Unverified Email</span>
     </div>
+    <button mat-raised-button color="accent" (click)="sendVerificationEmail()" *ngIf="! user.verified || user.new_email">
+      Resend Verification Email
+    </button>
   </div>
   <div fxLayout="column" class="actions">
     <button mat-raised-button color="warn" (click)="logout()">

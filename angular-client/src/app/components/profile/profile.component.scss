@@ -4,11 +4,19 @@
     margin: 5px;
   }
 }
-.verified {
+
+.email-status {
+  margin: 50px 0;
+
+  .verified {
     color: green;
-    margin: 50px 0;
-}
-.unverified {
+  }
+
+  .unverified {
     color: red;
-    margin: 20px 0;
+  }
+
+  button {
+    margin: 10px 0;
+  }
 }
