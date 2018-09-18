@@ -14,7 +14,10 @@
 		"username": "xxxxx",
 		"password": "xxxxxxxxx"
 	},
-	"links": [],
+	"links": [
+		"@materia/users",
+		"@materia/mailjet"
+	],
 	"client": {
 		"src": "angular-client",
 		"dist": "angular-client/dist/materia-user-management-example",
@@ -22,6 +25,33 @@
 			"build": "angular:build",
 			"watch": "angular:watch",
 			"prod": "angular:prod"
+		},
+		"buildEnabled": true,
+		"autoWatch": false
+	},
+	"addons": {
+		"@materia/users": {
+			"method": "session",
+			"static_salt": "nrFljxPqsR",
+			"user_profile_enabled": "false",
+			"user_profile_entity": "",
+			"email_verification": true,
+			"email_addon": "@materia/mailjet",
+			"template_signup": 534280,
+			"redirect_signup": "/signin",
+			"subject_signup": "Verify Email",
+			"subject_lost_password": "Lost Password",
+			"subject_change_email": "Change Email",
+			"template_lost_password": 536128,
+			"redirect_lost_password": "/reset-password",
+			"template_change_email": 536763,
+			"redirect_change_email": "/profile"
+		},
+		"@materia/mailjet": {
+			"apikey": "xxxxxx",
+			"secret": "xxxxxx",
+			"from": "xxxxxx",
+			"name": "MateriaTeam"
 		}
 	}
 }
