@@ -7,7 +7,7 @@
 		"angular:build": "cd angular-client && npm run build",
 		"angular:prod": "cd angular-client && npm run prod",
 		"angular:watch": "cd angular-client && npm run watch",
-		"postinstall": "materia relink",
+		"postinstall": "npm link @materia/mailjet @materia/users && cd angular-client && npm install && npm run build",
 		"start": "materia start"
 	},
 	"dependencies": {
