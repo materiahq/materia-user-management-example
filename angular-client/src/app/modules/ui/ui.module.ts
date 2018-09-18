@@ -10,7 +10,8 @@ import {
   MatIconModule,
   MatDividerModule,
   MatDialogModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatProgressBarModule
 } from '@angular/material';
 
 const UI_MODULES = [
@@ -25,7 +26,8 @@ const UI_MODULES = [
   MatMenuModule,
   MatDividerModule,
   MatDialogModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatProgressBarModule
 ];
 
 @NgModule({

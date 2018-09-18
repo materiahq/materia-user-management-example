@@ -14,6 +14,7 @@ import { LostPasswordComponent } from '../../dialogs/lost-password/lost-password
 export class SigninComponent implements OnInit {
   form: FormGroup;
   errorMessage: any;
+  processing: boolean;
 
   get emailControl() {
     return this.form.get('email');
@@ -47,9 +48,13 @@ export class SigninComponent implements OnInit {
 
   logIn() {
     if (this.form.valid) {
+      this.processing = true;
       this.store.dispatch(new Signin(this.form.value)).subscribe(
         () => this.store.dispatch(new Navigate(['/profile'])),
-        (response) => this.errorMessage = response && response.error ? response.error.message : 'Internal error');
+        (response) => {
+          this.processing = false;
+          this.errorMessage = response && response.error ? response.error.message : 'Internal error';
+        });
     }
   }
 

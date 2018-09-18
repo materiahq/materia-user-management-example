@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup;
+  processing: boolean;
 
   get emailControl() {
     return this.form.get('email');
@@ -40,15 +41,21 @@ export class SignupComponent implements OnInit {
 
   signup() {
     if (this.form.valid) {
+      this.processing = true;
       this.store.dispatch(new Signup(this.form.value))
         .subscribe(
           () => this.store.dispatch(new CheckConnection())
             .subscribe(() => {
               this.store.dispatch(new Navigate(['/profile']));
             },
-              (err) => this.snackBar.open(err.error, null, { duration: 1500 })
-            ),
-          (err) => this.snackBar.open(err.error, null, { duration: 1500 }));
+              (err) => {
+                this.processing = false;
+                this.snackBar.open(err.error, null, { duration: 1500 });
+              }),
+          (err) => {
+            this.processing = false;
+            this.snackBar.open(err.error, null, { duration: 1500 });
+          });
     }
   }
 }

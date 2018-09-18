@@ -1,5 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <mat-card>
+    <mat-progress-bar mode="indeterminate" *ngIf="processing"></mat-progress-bar>
     <mat-card-title>Sign In</mat-card-title>
     <form [formGroup]="form" fxLayout="column" (submit)="logIn()">
       <mat-form-field>

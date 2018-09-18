@@ -1,4 +1,5 @@
 mat-card {
+    position: relative;
     margin: 150px;
     width: 250px;
     button {
@@ -6,5 +7,11 @@ mat-card {
     }
     mat-form-field {
         margin-bottom: 10px;
+    }
+    mat-progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
     }
 }
