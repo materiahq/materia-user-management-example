@@ -1,4 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.error {
+  background: red;
+  color: white;
+  font-weight: 300;
+  margin: 15px 0;
+  padding: 20px 10px;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.classic-dialog {
+  .mat-dialog-container {
+    padding: 0;
+  }
+}

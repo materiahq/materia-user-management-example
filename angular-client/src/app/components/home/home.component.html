@@ -2,12 +2,16 @@
   <img src="http://getmateria.com/img/logo2.png" >
   <h1 class="title">Materia User Management</h1>
   <h2 style="color:#999999;">Sample Application</h2>
-  <div fxLayout="column">
-    <button mat-raised-button color="primary" routerLink='/signin' *ngIf="! user">
+  <div fxLayout="column" fxLayoutAlign="center center" style="margin-top: 50px;">
+    <button mat-raised-button color="primary" routerLink='/signin' *ngIf="! isConnected">
       Sign in
     </button>
-    <button mat-raised-button color="primary" routerLink='/profile' *ngIf="user">
-      Enter
+    <span style="font-style: italic; margin: 15px;" *ngIf="! isConnected">Or</span>
+    <button mat-raised-button routerLink='/signup' *ngIf="! isConnected">
+      Sign up
+    </button>
+    <button mat-raised-button color="primary" routerLink='/profile' *ngIf="isConnected">
+      Profile
     </button>
   </div>
 </div>

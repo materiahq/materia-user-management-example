@@ -1,4 +1,18 @@
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="start center">
-  <img src="http://getmateria.com/img/logo2.png">
-  <h3 class="title" class="row content title" routerLink='/' routerLinkActive="active">Materia</h3>
+  <div fxLayout="row" fxLayoutAlign="start center" routerLink='/' style="cursor: pointer;">
+    <img src="http://getmateria.com/img/logo2.png">
+    <h3>Materia</h3>
+  </div>
+  <span fxFlex></span>
+  <div *ngIf="connected" fxLayout="column">
+    <button mat-raised-button [matMenuTriggerFor]="menu">
+      {{ email$ | async}}
+    </button>
+    <mat-menu #menu="matMenu" overlapTrigger="false">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
 </mat-toolbar>

@@ -1,0 +1,30 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-title>Sign In</mat-card-title>
+    <form [formGroup]="form" fxLayout="column" (submit)="logIn()">
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="emailControlErrors?.required">This field is required</mat-error>
+        <mat-error *ngIf="emailControlErrors?.email">Email must be a valid email address</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" formControlName="password">
+        <mat-error *ngIf="passwordControlErrors?.required">This field is required</mat-error>
+      </mat-form-field>
+      <div *ngIf="errorMessage" fxLayout="row" fxLayoutAlign="center center" class="error">
+        {{ errorMessage }}
+      </div>
+      <button mat-raised-button color="primary" type="submit">
+        LOG IN
+      </button>
+      <div fxLayout="column">
+        <span>Lost your password ?</span>
+        <button mat-raised-button (click)="lostPassword()" type="button">RESET PASSWORD</button>
+      </div>
+      <div fxLayout="column">
+        <span>You don't have any account yet ?</span>
+        <button mat-raised-button routerLink="/signup" type="button">SIGNUP</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

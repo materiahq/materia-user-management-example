@@ -1,0 +1,17 @@
+<div fxLayout="column">
+    <mat-toolbar color="primary">
+      Change your email
+    </mat-toolbar>
+    <form [formGroup]="form" fxLayout="column" (submit)="confirm()">
+      <mat-form-field>
+        <input matInput placeholder="New Email" formControlName="new_email" required>
+        <mat-error *ngIf="emailControlErrors?.required">This field is required</mat-error>
+        <mat-error *ngIf="emailControlErrors?.email">Email must be a valid email address</mat-error>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" type="submit">CONFIRM</button>
+        <button mat-raised-button mat-dialog-close="cancel">CANCEL</button>
+      </div>
+    </form>
+  </div>
+  

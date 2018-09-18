@@ -1,0 +1,28 @@
+<div fxLayout="column" fxLayoutAlign="center center" *ngIf="user$ | async as user" style="padding-top: 100px; padding: 50px;">
+  <h2 style="font-weight: 300;">Welcome {{ user.email }}</h2>
+  <div>
+    <span>You are now connected to our materia usermanagement example application!</span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="verified" fxLayout="row" fxLayoutAlign="center center" *ngIf="user.verified">
+        <mat-icon>verified_user</mat-icon>
+        <span>Verified Email</span>
+    </div>
+    <div class="unverified" fxLayout="row" fxLayoutAlign="center center" *ngIf="! user.verified">
+        <mat-icon>close</mat-icon>
+        <span>Unverified Email</span>
+    </div>
+  </div>
+  <div fxLayout="column" class="actions">
+    <button mat-raised-button color="warn" (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon> Logout
+    </button>
+    <button mat-raised-button (click)="changeEmail()">
+      <mat-icon>mail</mat-icon> Change Email
+    </button>
+    <button mat-raised-button (click)="changePassword()">
+      <mat-icon>lock</mat-icon> Change Password
+    </button>
+  </div>
+
+</div>
