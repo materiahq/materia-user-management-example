@@ -8,28 +8,35 @@
 		"@materia/users": {
 			"method": "session",
 			"static_salt": "nrFljxPqsR",
-			"template_signup": "",
-			"redirect_signup": "",
-			"template_lost_password": "",
-			"redirect_lost_password": "",
-			"template_change_email": "",
-			"redirect_change_email": ""
+			"user_profile_enabled": "false",
+			"user_profile_entity": "",
+			"email_verification": true,
+			"email_addon": "@materia/mailjet",
+			"template_signup": 534280,
+			"redirect_signup": "/signin",
+			"subject_signup": "Verify Email",
+			"subject_lost_password": "Lost Password",
+			"subject_change_email": "Change Email",
+			"template_lost_password": 536128,
+			"redirect_lost_password": "/reset-password",
+			"template_change_email": 536763,
+			"redirect_change_email": "/profile"
 		},
 		"@materia/mailjet": {
-			"apikey": "756a62bcfc85f461c5df9d3de1c7f861",
-			"secret": "896d66f88e3355ed00e9872f9560944d",
-			"from": "jeanmarc.royy@gmail.com",
-			"name": "MapYourHolidaysTeam"
+			"apikey": "xxxxxx",
+			"secret": "xxxxxx",
+			"from": "xxxxxx",
+			"name": "MateriaTeam"
 		}
 	},
 	"links": [],
 	"database": {
 		"database": "materia-user-management-example",
 		"host": "localhost",
-		"password": "Uranus03021989",
+		"password": "xxxxxxx",
 		"port": 5432,
 		"type": "postgres",
-		"username": "postgres"
+		"username": "xxxxxxxx"
 	},
 	"url": "http://localhost:8080/"
 }
