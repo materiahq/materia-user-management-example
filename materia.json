@@ -14,20 +14,17 @@
 		"username": "xxxxx",
 		"password": "xxxxxxxxx"
 	},
-	"links": [
-		"@materia/users",
-		"@materia/mailjet"
-	],
+	"links": [],
 	"client": {
-		"src": "angular-client",
-		"dist": "angular-client/dist/materia-user-management-example",
+		"packageJsonPath": "angular-client",
+		"www": "angular-client/dist/materia-user-management-example",
 		"scripts": {
-			"build": "angular:build",
-			"watch": "angular:watch",
-			"prod": "angular:prod"
+			"build": "build",
+			"watch": "watch",
+			"prod": "prod"
 		},
-		"buildEnabled": true,
-		"autoWatch": false
+		"autoWatch": false,
+		"build": true
 	},
 	"addons": {
 		"@materia/users": {

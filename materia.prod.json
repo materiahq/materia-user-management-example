@@ -4,6 +4,32 @@
 		"port": 8080,
 		"ssl": false
 	},
-	"addons": {},
-	"links": []
+	"addons": {
+		"@materia/users": {
+			"method": "session",
+			"static_salt": "nrFljxPqsR",
+			"template_signup": "",
+			"redirect_signup": "",
+			"template_lost_password": "",
+			"redirect_lost_password": "",
+			"template_change_email": "",
+			"redirect_change_email": ""
+		},
+		"@materia/mailjet": {
+			"apikey": "756a62bcfc85f461c5df9d3de1c7f861",
+			"secret": "896d66f88e3355ed00e9872f9560944d",
+			"from": "jeanmarc.royy@gmail.com",
+			"name": "MapYourHolidaysTeam"
+		}
+	},
+	"links": [],
+	"database": {
+		"database": "materia-user-management-example",
+		"host": "localhost",
+		"password": "Uranus03021989",
+		"port": 5432,
+		"type": "postgres",
+		"username": "postgres"
+	},
+	"url": "http://localhost:8080/"
 }
