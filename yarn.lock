@@ -58,10 +58,10 @@
     winston "^2.3.1"
     ws "^5.1.1"
 
-"@materia/users@1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@materia/users/-/users-1.0.0-beta.2.tgz#23d53849e61e864b093aec8d9a65c9a5c1a67a56"
-  integrity sha512-9ZCxxhNMijU24g17NawHKaH4CZMcSKjkOoAiUIYgNhiLPfST1cTUbmelfR78GFGrwmp4ZJ4TSNASpuQfWkOO2w==
+"@materia/users@1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@materia/users/-/users-1.0.0-beta.4.tgz#179cc4ca9dae54dc60132d06c8ff6ab688d53456"
+  integrity sha512-SZ7ana5kAszcUoSS2Zo4nFEZnZ4v5ET11EXEJjeGhZ3J/fRDOTTAjYk4liNTidpm6ZMZtSb9Fh8FDGX3/Szfpg==
   dependencies:
     express-session "^1.15.6"
     flash "^1.1.0"
