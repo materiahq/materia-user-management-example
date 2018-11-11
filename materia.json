@@ -7,12 +7,8 @@
 		"ssl": false
 	},
 	"database": {
-		"type": "postgres",
-		"host": "localhost",
-		"port": 5432,
-		"database": "materia-user-management-example",
-		"username": "xxxxx",
-		"password": "xxxxxxxxx"
+		"storage": "database.sqlite",
+		"type": "sqlite"
 	},
 	"links": [],
 	"client": {
@@ -23,8 +19,7 @@
 			"watch": "watch",
 			"prod": "prod"
 		},
-		"autoWatch": false,
-		"build": true
+		"autoWatch": false
 	},
 	"addons": {
 		"@materia/users": {
@@ -47,8 +42,7 @@
 		"@materia/mailjet": {
 			"apikey": "xxxxxx",
 			"secret": "xxxxxx",
-			"from": "xxxxxx",
-			"name": "MateriaTeam"
+			"from": "xxxxxx"
 		}
 	}
 }

@@ -25,18 +25,9 @@
 		"@materia/mailjet": {
 			"apikey": "xxxxxx",
 			"secret": "xxxxxx",
-			"from": "xxxxxx",
-			"name": "MateriaTeam"
+			"from": "xxxxxx"
 		}
 	},
 	"links": [],
-	"database": {
-		"database": "materia-user-management-example",
-		"host": "localhost",
-		"password": "xxxxxxx",
-		"port": 5432,
-		"type": "postgres",
-		"username": "xxxxxxxx"
-	},
 	"url": "http://localhost:8080/"
 }
