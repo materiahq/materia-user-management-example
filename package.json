@@ -4,10 +4,6 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"angular:build": "cd angular-client && npm run build",
-		"angular:prod": "cd angular-client && npm run prod",
-		"angular:watch": "cd angular-client && npm run watch",
-		"postinstall": "cd angular-client && npm install && npm run prod",
 		"start": "materia start",
 		"start:prod": "materia start --mode=prod"
 	},
