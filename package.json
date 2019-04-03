@@ -1,19 +1,16 @@
 {
 	"name": "materia-user-management-example",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Example application showing the usecase of official user-management/emailing addons.",
 	"main": "index.js",
 	"scripts": {
 		"start": "materia start",
 		"start:prod": "materia start --mode=prod"
 	},
 	"dependencies": {
-		"@materia/mailjet": "^1.0.0-beta.3",
-		"@materia/server": "^1.0.0-beta.4",
-		"@materia/users": "1.0.0-beta.4"
-	},
-	"engines": {
-		"node": ">= 4.3.2"
+		"@materia/mailjet": "^1.0.0-beta.5",
+		"@materia/server": "^1.0.0-beta.15",
+		"@materia/users": "1.0.0-beta.5"
 	},
 	"author": "jean-marc.roy@getmateria.com",
 	"license": "MIT"
