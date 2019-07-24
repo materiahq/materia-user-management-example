@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Signup, CheckConnection } from '../../stores/user/user.state';
 import { Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { Signup, CheckConnection } from '../../stores/user/user.state';
 
 @Component({
   selector: 'muser-signup',

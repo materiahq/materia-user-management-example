@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { Signin, LostPassword } from '../../stores/user/user.state';
 import { Navigate } from '@ngxs/router-plugin';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+
+import { Signin, LostPassword } from '../../stores/user/user.state';
 import { LostPasswordComponent } from '../../dialogs/lost-password/lost-password.component';
 
 @Component({

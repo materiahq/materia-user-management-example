@@ -10,6 +10,7 @@ import { filter, map } from 'rxjs/operators';
 })
 export class UnauthGuard implements CanActivate {
   @Select(state => state.user.inited) isInited$: Observable<boolean>;
+
   constructor(private store: Store) {}
 
   canActivate(): Observable<boolean> {

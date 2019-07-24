@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { IUser, Logout, ChangePassword, ChangeEmail, SendVerificationEmail } from '../../stores/user/user.state';
-import { MatDialog, MatSnackBar } from '@angular/material';
 import { PasswordEditorComponent } from '../../dialogs/password-editor/password-editor.component';
 import { EmailEditorComponent } from '../../dialogs/email-editor/email-editor.component';
 

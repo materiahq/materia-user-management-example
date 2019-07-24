@@ -1,6 +1,7 @@
 import { State, Action, StateContext, NgxsOnInit, Store } from '@ngxs/store';
-import { UsermanagementService } from '../../services/usermanagement.service';
 import { Navigate } from '@ngxs/router-plugin';
+
+import { UsermanagementService } from '../../services/usermanagement.service';
 
 export interface IUser {
   id_user?: number;
