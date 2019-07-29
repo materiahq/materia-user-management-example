@@ -1,8 +1,8 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <mat-card>
-    <mat-progress-bar mode="indeterminate" *ngIf="processing"></mat-progress-bar>
-    <mat-card-title>Sign In</mat-card-title>
-    <form [formGroup]="form" fxLayout="column" (submit)="logIn()">
+    <mat-progress-bar mode="indeterminate" *ngIf="isProcessing$ | async"></mat-progress-bar>
+    <mat-card-title>Sign in</mat-card-title>
+    <form [formGroup]="form" fxLayout="column" (submit)="signIn()">
       <mat-form-field>
         <input matInput placeholder="Email" formControlName="email">
         <mat-error *ngIf="emailControlErrors?.required">This field is required</mat-error>
@@ -16,7 +16,7 @@
         {{ errorMessage }}
       </div>
       <button mat-raised-button color="primary" type="submit">
-        LOG IN
+        SIGN IN
       </button>
       <div fxLayout="column">
         <span>Lost your password ?</span>

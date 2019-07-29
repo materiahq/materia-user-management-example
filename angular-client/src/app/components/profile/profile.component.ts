@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { IUser, Logout, ChangePassword, ChangeEmail, SendVerificationEmail } from '../../stores/user/user.state';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../stores';
+import { User } from '../../models/user.model';
+import { logOut, sendVerificationEmail, changeEmail, changePassword } from '../../stores/user/user.actions';
+
 import { PasswordEditorComponent } from '../../dialogs/password-editor/password-editor.component';
 import { EmailEditorComponent } from '../../dialogs/email-editor/email-editor.component';
 
@@ -14,24 +16,24 @@ import { EmailEditorComponent } from '../../dialogs/email-editor/email-editor.co
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  @Select(state => state.user) user$: Observable<IUser>;
+  user$: Observable<User> = this.store.select(fromRoot.getConnectedUser);
 
-  constructor(private store: Store, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(
+    private store: Store<fromRoot.AppState>,
+    private dialog: MatDialog
+  ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   logout() {
-    this.store.dispatch(new Logout());
+    this.store.dispatch(logOut());
   }
 
   changePassword() {
     const dialogRef = this.dialog.open(PasswordEditorComponent, { panelClass: 'classic-dialog' });
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result !== 'cancel') {
-        this.store.dispatch(new ChangePassword({ old_password: result.old_password, new_password: result.new_password })).subscribe(() => {
-          this.snackBar.open('Password successfully changed !', null, { duration: 1500 });
-        });
+        this.store.dispatch(changePassword({ old_password: result.old_password, new_password: result.new_password }));
       }
     });
   }
@@ -40,18 +42,12 @@ export class ProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(EmailEditorComponent, { panelClass: 'classic-dialog' });
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result !== 'cancel') {
-        this.store.dispatch(new ChangeEmail(result)).subscribe(() => {
-          this.snackBar.open(`A verification email has been sent to '${result.new_email}' !`, null, { duration: 1500 });
-        });
+        this.store.dispatch(changeEmail(result));
       }
     });
   }
 
   sendVerificationEmail() {
-    this.store.dispatch(new SendVerificationEmail()).subscribe(
-      () => {
-        this.snackBar.open('Verification email has been sent !', null, { duration: 1500 });
-      },
-      (errorResponse) => this.snackBar.open(errorResponse.error, null, { duration: 1500 }));
+    this.store.dispatch(sendVerificationEmail());
   }
 }

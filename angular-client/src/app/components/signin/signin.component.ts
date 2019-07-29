@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Signin, LostPassword } from '../../stores/user/user.state';
+import { Store} from '@ngrx/store';
+import { signIn, sendLostPasswordEmail } from '../../stores/user/user.actions';
+import { isAuthenticationProcessing, AppState } from '../../stores';
+
 import { LostPasswordComponent } from '../../dialogs/lost-password/lost-password.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class SigninComponent implements OnInit {
   form: FormGroup;
   errorMessage: any;
   processing: boolean;
+  isProcessing$: Observable<boolean> = this.store.select(isAuthenticationProcessing);
 
   get emailControl() {
     return this.form.get('email');
@@ -36,9 +38,8 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private store: Store<AppState>,
+    private dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -48,15 +49,10 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  logIn() {
+  signIn() {
     if (this.form.valid) {
       this.processing = true;
-      this.store.dispatch(new Signin(this.form.value)).subscribe(
-        () => this.store.dispatch(new Navigate(['/profile'])),
-        (response) => {
-          this.processing = false;
-          this.errorMessage = response && response.error ? response.error.message : 'Internal error';
-        });
+      this.store.dispatch(signIn(this.form.value));
     }
   }
 
@@ -64,14 +60,7 @@ export class SigninComponent implements OnInit {
     const dialogRef = this.dialog.open(LostPasswordComponent, {panelClass: 'classic-dialog'});
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result !== 'cancel') {
-        this.store.dispatch(new LostPassword(result)).subscribe(
-          () => {
-            this.snackBar.open(`A reset password email has been sent to ${result.email}`, null, {duration: 1500});
-        },
-        (errorResponse) => {
-          this.snackBar.open(errorResponse.error, null, {duration: 1500});
-        }
-        );
+        this.store.dispatch(sendLostPasswordEmail(result))
       }
     });
   }

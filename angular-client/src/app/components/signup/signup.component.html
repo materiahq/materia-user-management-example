@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center center">
     <mat-card>
-      <mat-progress-bar mode="indeterminate" *ngIf="processing"></mat-progress-bar>
+      <mat-progress-bar mode="indeterminate" *ngIf="isProcessing$ | async"></mat-progress-bar>
       <mat-card-title>Sign up</mat-card-title>
       <form [formGroup]="form" fxLayout="column" (submit)="signup()">
         <mat-form-field>
@@ -22,4 +22,3 @@
       </form>
     </mat-card>
   </div>
-  

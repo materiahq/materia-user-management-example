@@ -4,7 +4,7 @@
     </mat-toolbar>
     <form [formGroup]="form" fxLayout="column" (submit)="confirm()">
       <mat-form-field>
-        <input matInput placeholder="New Email" formControlName="new_email" required>
+        <input matInput placeholder="New email" formControlName="new_email" required>
         <mat-error *ngIf="emailControlErrors?.required">This field is required</mat-error>
         <mat-error *ngIf="emailControlErrors?.email">Email must be a valid email address</mat-error>
       </mat-form-field>
@@ -14,4 +14,3 @@
       </div>
     </form>
   </div>
-  

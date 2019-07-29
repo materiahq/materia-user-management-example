@@ -14,7 +14,7 @@ export class PasswordEditorComponent implements OnInit {
     return this.form.value && this.form.value.new_password.length && this.form.value.new_password === this.form.value.new_password_2;
   }
 
-  constructor(private fb: FormBuilder, private dialog: MatDialogRef<PasswordEditorComponent>) { }
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<PasswordEditorComponent>) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -26,7 +26,7 @@ export class PasswordEditorComponent implements OnInit {
 
   confirm() {
     if (this.form.valid && this.passwordsMatch) {
-
+      this.dialogRef.close(this.form.value);
     }
   }
 

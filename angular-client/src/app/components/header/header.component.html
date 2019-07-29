@@ -4,7 +4,7 @@
     <h3>Materia</h3>
   </div>
   <span fxFlex></span>
-  <div *ngIf="connected" fxLayout="column">
+  <div *ngIf="isConnected$ | async" fxLayout="column">
     <button mat-raised-button [matMenuTriggerFor]="menu">
       {{ email$ | async}}
     </button>

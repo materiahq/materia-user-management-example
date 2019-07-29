@@ -2,12 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { NgxsModule } from '@ngxs/store';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { UserState } from './stores/user/user.state';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducer as userReducer } from './stores/user/user.reducer';
+import { environment } from '../environments/environment';
+import { UserEffects } from './stores/user/user.effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { UiModule } from './modules/ui/ui.module';
@@ -22,8 +25,25 @@ import { PasswordEditorComponent } from './dialogs/password-editor/password-edit
 import { EmailEditorComponent } from './dialogs/email-editor/email-editor.component';
 import { LostPasswordComponent } from './dialogs/lost-password/lost-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    UiModule,
+    AppRoutingModule,
+
+    StoreModule.forRoot({
+      authentication: userReducer,
+      router: routerReducer
+    }),
+    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([UserEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+  ],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -36,18 +56,11 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     LostPasswordComponent,
     ResetPasswordComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgxsModule.forRoot([UserState]),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsRouterPluginModule.forRoot(),
-    UiModule
-  ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   entryComponents: [
     PasswordEditorComponent,

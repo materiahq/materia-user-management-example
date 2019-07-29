@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
-import { Store, Select } from '@ngxs/store';
-import { Navigate } from '@ngxs/router-plugin';
+import { CanActivate, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, withLatestFrom } from 'rxjs/operators';
+
+import * as fromRoot from '../stores';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UnauthGuard implements CanActivate {
-  @Select(state => state.user.inited) isInited$: Observable<boolean>;
+  private isInited$: Observable<boolean> = this.store.select(fromRoot.isUserInited);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store<fromRoot.AppState>, private router: Router) {}
 
   canActivate(): Observable<boolean> {
     return this.isInited$.pipe(
       filter(inited => inited === true),
-      map(() => {
-        const isConnected = this.store.selectSnapshot<boolean>((state) => state.user.connected);
+      withLatestFrom(this.store.select(fromRoot.isUserConnected)),
+      map(([isInited, isConnected ]) => {
         if (isConnected) {
-          this.store.dispatch(new Navigate(['/profile']));
+          this.router.navigateByUrl('/profile');
           return false;
         }
         return true;

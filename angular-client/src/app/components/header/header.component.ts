@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngrx/store';
+
 import { Observable } from 'rxjs';
-import { Logout } from '../../stores/user/user.state';
+import { map } from 'rxjs/operators';
+
+import * as fromRoot from '../../stores';
+import { logOut } from '../../stores/user/user.actions';
 
 @Component({
   selector: 'muser-header',
@@ -9,20 +13,17 @@ import { Logout } from '../../stores/user/user.state';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Select(state => state.user.connected) isConnected$: Observable<boolean>;
-  @Select(state => state.user.email) email$: Observable<string>;
-  connected: boolean;
+  isConnected$: Observable<boolean> = this.store.select(fromRoot.isUserConnected);
+  email$: Observable<string> = this.store.select(fromRoot.getConnectedUser).pipe(
+    map(user => user && user.email)
+  );
 
-  constructor(private store: Store) { }
+  constructor(private store: Store<fromRoot.AppState>) { }
 
-  ngOnInit() {
-    this.isConnected$.subscribe(connected => {
-      this.connected = connected;
-    });
-  }
+  ngOnInit() { }
 
   logout() {
-    this.store.dispatch(new Logout());
+    this.store.dispatch(logOut());
   }
 
 }

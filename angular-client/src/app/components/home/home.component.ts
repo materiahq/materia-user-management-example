@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../stores';
 
 @Component({
   selector: 'muser-home',
@@ -8,14 +10,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @Select(state => state.user.connected) isConnected$: Observable<boolean>;
-  user: any;
-  isConnected: boolean;
+  isConnected$: Observable<boolean> = this.store.select(fromRoot.isUserConnected);
 
-  constructor() { }
+  constructor(private store: Store<fromRoot.AppState>) { }
 
-  ngOnInit() {
-    this.isConnected$.subscribe(connected => this.isConnected = connected);
-  }
+  ngOnInit() { }
 
 }
