@@ -10,8 +10,9 @@
 	"dependencies": {
 		"@materia/mailjet": "^1.0.0",
 		"@materia/server": "^1.0.2",
-		"@materia/users": "^1.0.0"
+		"@materia/users": "^1.0.1"
 	},
 	"author": "jean-marc.roy@getmateria.com",
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {}
 }
